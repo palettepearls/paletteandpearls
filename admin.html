@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Admin - Palette & Pearls</title>
-</head>
 <body>
 
-<h2>Add Product</h2>
+<h2>Admin Login</h2>
+
+Username:<br>
+<input id="user"><br>
+
+Password:<br>
+<input type="password" id="pass"><br><br>
+
+<button onclick="login()">Login</button>
+
+<div id="panel" style="display:none;">
+
+<h3>Add Product</h3>
 
 Name:<br>
-<input id="name"><br><br>
+<input id="name"><br>
 
 Price:<br>
-<input id="price"><br><br>
+<input id="price"><br>
 
 Image URL:<br>
-<input id="image"><br><br>
+<input id="image"><br>
+
+Stock:<br>
+<input id="stock"><br><br>
 
 <button onclick="addProduct()">Add Product</button>
 
+</div>
+
 <script>
+
+function login(){
+if(document.getElementById("user").value=="palette&pearls" &&
+document.getElementById("pass").value=="p&p123"){
+document.getElementById("panel").style.display="block";
+}else{alert("Wrong login");}
+}
+
 function addProduct(){
 let products = JSON.parse(localStorage.getItem("products")) || [];
 products.push({
 name:document.getElementById("name").value,
 price:document.getElementById("price").value,
-image:document.getElementById("image").value
+image:document.getElementById("image").value,
+stock:document.getElementById("stock").value
 });
 localStorage.setItem("products",JSON.stringify(products));
-alert("Product Added");
+alert("Product added");
 }
+
 </script>
 
 </body>

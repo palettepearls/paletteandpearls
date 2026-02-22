@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,41 +10,20 @@
 
 <header class="header">
 <img src="logo.png" class="logo">
-<div class="brand">
-<span class="palette">Palette</span>
-<span class="and">&</span>
-<span class="pearls">Pearls</span>
-</div>
-<nav>
-<a href="#">Home</a>
-<a href="#products">Products</a>
-<a href="#cart">Cart (<span id="cartCount">0</span>)</a>
-<a href="admin.html">Admin</a>
-</nav>
+<h2>Palette & Pearls</h2>
+<a href="admin.html">Admin Login</a>
 </header>
 
-<section class="hero">
-<h1>Handmade with Love</h1>
-<p>Jewellery, Clay Art, Fridge Magnets & More</p>
-</section>
+<h2>Products</h2>
+<div id="products" class="grid"></div>
 
-<section id="products">
-<h2>Our Products</h2>
-<div id="productGrid" class="grid"></div>
-</section>
-
-<section id="cart">
-<h2>Your Cart</h2>
-<div id="cartItems"></div>
+<h2>Cart</h2>
+<div id="cart"></div>
 <div id="total"></div>
-<button onclick="checkout()" class="checkout">Order via WhatsApp</button>
-</section>
 
-<footer>
-© 2026 Palette & Pearls
-</footer>
+<button onclick="whatsappCheckout()">Order on WhatsApp</button>
+<button onclick="upiCheckout()">Pay via UPI</button>
 
 <script src="script.js"></script>
-
 </body>
 </html>
