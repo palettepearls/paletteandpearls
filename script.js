@@ -1,56 +1,103 @@
-var products = JSON.parse(localStorage.getItem("products")) || [
-{ name:"Earrings", price:199 },
-{ name:"Clay Plate", price:499 }
+let products = JSON.parse(localStorage.getItem("products")) || [
+
+{
+name:"Handmade Earrings",
+price:199,
+image:"product1.jpg"
+},
+
+{
+name:"Clay Plate",
+price:499,
+image:"product2.jpg"
+},
+
+{
+name:"Fridge Magnet",
+price:149,
+image:"product3.jpg"
+}
+
 ];
 
-var cart = [];
+let cart = [];
 
 function loadProducts()
 {
-var html="";
+
+let html="";
 
 products.forEach((p,i)=>
 {
+
 html+=`
+
 <div class="product">
-${p.name}<br>
-₹${p.price}<br>
-<button onclick="addToCart(${i})">Add to Cart</button>
+
+<img src="${p.image}">
+
+<h3>${p.name}</h3>
+
+<div class="price">₹${p.price}</div>
+
+<button onclick="addToCart(${i})">
+Add to Cart
+</button>
+
 </div>
+
 `;
+
 });
 
-document.getElementById("products").innerHTML=html;
+document.getElementById("productGrid").innerHTML=html;
+
 }
 
 function addToCart(i)
 {
+
 cart.push(products[i]);
+
 loadCart();
+
 }
 
 function loadCart()
 {
-var html="";
+
+let html="";
+let total=0;
 
 cart.forEach(p=>
 {
-html+=`${p.name} ₹${p.price}<br>`;
+
+html+=`${p.name} - ₹${p.price}<br>`;
+
+total+=Number(p.price);
+
 });
 
-document.getElementById("cart").innerHTML=html;
+document.getElementById("cartItems").innerHTML=html;
+
+document.getElementById("total").innerHTML="Total: ₹"+total;
+
 }
 
 function checkout()
 {
-var msg="Order details:%0A";
+
+let msg="Hello, I want to order:%0A";
 
 cart.forEach(p=>
 {
+
 msg+=p.name+" ₹"+p.price+"%0A";
+
 });
 
 window.open("https://wa.me/918670322260?text="+msg);
+
 }
 
 loadProducts();
