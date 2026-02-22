@@ -1,39 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Panel</title>
+<title>Admin - Palette & Pearls</title>
 </head>
-
 <body>
 
 <h2>Add Product</h2>
 
-Name:
-<input id="name">
+Name:<br>
+<input id="name"><br><br>
 
-Price:
-<input id="price">
+Price:<br>
+<input id="price"><br><br>
 
-<button onclick="add()">Add</button>
+Image URL:<br>
+<input id="image"><br><br>
+
+<button onclick="addProduct()">Add Product</button>
 
 <script>
-
-function add()
-{
-var products =
-JSON.parse(localStorage.getItem("products")) || [];
-
+function addProduct(){
+let products = JSON.parse(localStorage.getItem("products")) || [];
 products.push({
 name:document.getElementById("name").value,
-price:document.getElementById("price").value
+price:document.getElementById("price").value,
+image:document.getElementById("image").value
 });
-
-localStorage.setItem("products",
-JSON.stringify(products));
-
-alert("Product added");
+localStorage.setItem("products",JSON.stringify(products));
+alert("Product Added");
 }
-
 </script>
 
 </body>
