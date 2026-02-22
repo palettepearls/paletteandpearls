@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+</head>
+
+<body>
+
+<h2>Add Product</h2>
+
+Name:
+<input id="name">
+
+Price:
+<input id="price">
+
+<button onclick="add()">Add</button>
+
+<script>
+
+function add()
+{
+var products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+products.push({
+name:document.getElementById("name").value,
+price:document.getElementById("price").value
+});
+
+localStorage.setItem("products",
+JSON.stringify(products));
+
+alert("Product added");
+}
+
+</script>
+
+</body>
+</html>
