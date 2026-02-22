@@ -1,25 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Palette & Pearls</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<header>
+<header class="header">
+
 <img src="logo.png" class="logo">
+
+<nav>
+<a href="#">Home</a>
+<a href="#products">Products</a>
+<a href="#cart">Cart</a>
+<a href="admin.html">Admin</a>
+</nav>
+
 </header>
 
-<h2>Products</h2>
 
-<div id="products"></div>
+<section class="hero">
 
-<h2>Cart</h2>
+<h1>
+<span class="palette">Palette</span>
+<span class="and">&</span>
+<span class="pearls">Pearls</span>
+</h1>
 
-<div id="cart"></div>
+<p>Handmade Jewellery, Clay Art & Fridge Magnets</p>
 
-<button onclick="checkout()">Order via WhatsApp</button>
+</section>
+
+
+<section id="products">
+
+<h2>Our Products</h2>
+
+<div class="product-grid" id="productGrid"></div>
+
+</section>
+
+
+<section id="cart">
+
+<h2>Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<div class="cart-total" id="total"></div>
+
+<button class="checkout-btn" onclick="checkout()">
+Order on WhatsApp
+</button>
+
+</section>
+
+
+<footer>
+
+© 2026 Palette & Pearls
+
+</footer>
+
 
 <script src="script.js"></script>
 
