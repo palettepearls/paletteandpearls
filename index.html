@@ -3,63 +3,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Palette & Pearls</title>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-<style>
-body { font-family: Arial; padding:20px; }
-.product { border:1px solid #ccc; padding:10px; margin:10px; display:inline-block; width:200px; }
-img { width:100%; }
-button { padding:5px; }
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Palette & Pearls</h2>
-<a href="admin.html">Admin Login</a>
+<header>
+<h1>Palette & Pearls</h1>
+<input type="text" placeholder="Search products..." id="searchBox">
+<a href="customer.html">My Orders</a>
+<a href="admin.html">Admin</a>
+</header>
 
-<div id="products"></div>
+<main id="products"></main>
 
-<script>
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAsolLIxR8TQCelRdOWX14XLh4Ydx2vuVo",
-  authDomain: "paletteandpearls-41013.firebaseapp.com",
-  projectId: "paletteandpearls-41013",
-  storageBucket: "paletteandpearls-41013.firebasestorage.app",
-  messagingSenderId: "783620692633",
-  appId: "1:783620692633:web:9d7d44fd19496757ea3608"
-};
-
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-function loadProducts() {
-  db.collection("products").get().then(snapshot => {
-    let html = "";
-    snapshot.forEach(doc => {
-      let p = doc.data();
-      html += `
-        <div class="product">
-          <img src="${p.image}">
-          <h4>${p.name}</h4>
-          ₹${p.price}
-        </div>
-      `;
-    });
-    document.getElementById("products").innerHTML = html;
-  });
-}
-
-loadProducts();
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
