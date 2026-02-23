@@ -1,82 +1,65 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Palette & Pearls</title>
-<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<style>
+body { font-family: Arial; padding:20px; }
+.product { border:1px solid #ccc; padding:10px; margin:10px; display:inline-block; width:200px; }
+img { width:100%; }
+button { padding:5px; }
+</style>
+
 </head>
 <body>
 
-<header class="header">
-<img src="logo.png" class="logo">
-<nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('cart')">Cart (<span id="cartCount">0</span>)</button>
-<button onclick="showPage('adminLogin')">Admin</button>
-</nav>
-</header>
+<h2>Palette & Pearls</h2>
+<a href="admin.html">Admin Login</a>
 
-<section id="home">
-<h2>Products</h2>
-<div>
-Filter:
-<select onchange="filterCategory(this.value)">
-<option value="All">All</option>
-<option value="Jewellery">Jewellery</option>
-<option value="Fridge Magnets">Fridge Magnets</option>
-<option value="Clay Plates">Clay Plates</option>
-<option value="Home Decor">Home Decor</option>
-</select>
-</div>
-<div id="products" class="grid"></div>
-</section>
+<div id="products"></div>
 
-<section id="cart" style="display:none;">
-<button onclick="showPage('home')">← Back</button>
-<h2>Cart</h2>
-<div id="cartItems"></div>
-<div id="cartTotal"></div>
-<button onclick="whatsappCheckout()">Order WhatsApp</button>
-<button onclick="upiCheckout()">Pay UPI</button>
-</section>
+<script>
 
-<section id="adminLogin" style="display:none;">
-<button onclick="showPage('home')">← Back</button>
-<h2>Admin Login</h2>
-<input id="adminUser" placeholder="Username"><br>
-<input id="adminPass" type="password" placeholder="Password"><br>
-<button onclick="adminLogin()">Login</button>
-</section>
 
-<section id="adminPanel" style="display:none;">
-<button onclick="showPage('home')">← Back to Website</button>
-<h2>Admin Dashboard</h2>
+const firebaseConfig = {
+  apiKey: "AIzaSyAsolLIxR8TQCelRdOWX14XLh4Ydx2vuVo",
+  authDomain: "paletteandpearls-41013.firebaseapp.com",
+  projectId: "paletteandpearls-41013",
+  storageBucket: "paletteandpearls-41013.firebasestorage.app",
+  messagingSenderId: "783620692633",
+  appId: "1:783620692633:web:9d7d44fd19496757ea3608"
+};
 
-<h3>Add / Edit Product</h3>
 
-<input id="pName" placeholder="Name"><br>
-<input id="pPrice" placeholder="Price"><br>
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-<select id="pCategory">
-<option>Jewellery</option>
-<option>Fridge Magnets</option>
-<option>Clay Plates</option>
-<option>Home Decor</option>
-</select><br>
+function loadProducts() {
+  db.collection("products").get().then(snapshot => {
+    let html = "";
+    snapshot.forEach(doc => {
+      let p = doc.data();
+      html += `
+        <div class="product">
+          <img src="${p.image}">
+          <h4>${p.name}</h4>
+          ₹${p.price}
+        </div>
+      `;
+    });
+    document.getElementById("products").innerHTML = html;
+  });
+}
 
-<input id="pDesc" placeholder="Description"><br>
-<input id="pImage" placeholder="Image URL"><br>
-<input id="pStock" placeholder="Stock"><br>
+loadProducts();
 
-<button onclick="saveProduct()">Save Product</button>
-
-<h3>Existing Products</h3>
-<div id="adminProducts"></div>
-
-</section>
-
-<script src="script.js"></script>
+</script>
 
 </body>
 </html>
